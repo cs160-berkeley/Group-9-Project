@@ -4,3 +4,4 @@
 ## Members
 
 - Lily Nguyen
+- Bill Cao
