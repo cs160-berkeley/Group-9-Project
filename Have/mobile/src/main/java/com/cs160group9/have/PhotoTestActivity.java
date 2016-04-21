@@ -1,17 +1,19 @@
 package com.cs160group9.have;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.io.File;
 
 public class PhotoTestActivity extends AppCompatActivity implements PhotoPickerFragment.OnFragmentInteractionListener {
 
-    private File photo;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +22,12 @@ public class PhotoTestActivity extends AppCompatActivity implements PhotoPickerF
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        this.image = (ImageView)findViewById(R.id.image);
     }
 
     @Override
     public void onPhotoReturned(File f) {
-
+        image.setImageURI(Uri.fromFile(f));
         System.out.println("photo");
     }
 }
