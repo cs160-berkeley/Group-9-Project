@@ -42,6 +42,7 @@ public class SwipeLeftActivity extends WearableActivity {
             @Override
             public void onClick(View v) {
                 Intent loadResultsOnPhoneIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
+                loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
                 startService(loadResultsOnPhoneIntent);
                 Log.e("SwipeLeftActivity", "RESULT SENT TO SERVICE");
             }
