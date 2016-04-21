@@ -43,15 +43,18 @@ public class WatchToPhoneService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Bundle extras = intent.getExtras();
+        Log.e("WatchToPhoneService", "onStartCommand");
+        final Bundle extras = intent.getExtras();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mWatchApiClient.connect();
+                if (extras != null) {
+                    sendMessage("RESULT", "Result string");
+                    Log.e("WatchToPhoneService", "RESULT SEND MESSAGE");
+                }
 
-                sendMessage("RESULT", "Result string");
-                Log.e("WatchToPhoneService", "RESULT SEND MESSAGE");
 
             }
         }).start();

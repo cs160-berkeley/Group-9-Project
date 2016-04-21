@@ -40,6 +40,13 @@
             android:name=".RequestResultsActivity"
             android:label="@string/app_name">
         </activity>
+        <service android:name=".PhoneToWatchService" />
+        <service android:name=".PhoneListenerService"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
