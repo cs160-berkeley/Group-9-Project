@@ -7,21 +7,31 @@ import android.view.View;
 import android.widget.Button;
 
 public class PhotoAndReviewActivity extends AppCompatActivity {
+    private PhotoAndReviewActivity activity = this;
 
     private Button submitButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo_and_review);
+        this.setContentView(R.layout.activity_photo_and_review);
 
-        submitButton = (Button) findViewById(R.id.submit_btn);
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        this.submitButton = (Button) this.findViewById(R.id.submitButton);
+        this.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent requestSubmittedIntent = new Intent(getBaseContext(), RequestSubmittedActivity.class);
-                startActivity(requestSubmittedIntent);
+                Intent requestSubmittedIntent = new Intent(activity.getBaseContext(), RequestSubmittedActivity.class);
+                activity.startActivity(requestSubmittedIntent);
+            }
+        });
+
+        this.backButton = (Button) this.findViewById(R.id.backButton);
+        this.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backIntent = new Intent(activity.getBaseContext(), ConditionActivity.class);
+                activity.startActivity(backIntent);
             }
         });
     }
