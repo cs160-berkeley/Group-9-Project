@@ -20,7 +20,7 @@ public class PhotoAndReviewActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent requestSubmittedIntent = new Intent(getBaseContext(), RequestSubmittedActivity.class);
+                Intent requestSubmittedIntent = new Intent(getBaseContext(), PhotoTestActivity.class);
                 startActivity(requestSubmittedIntent);
             }
         });
