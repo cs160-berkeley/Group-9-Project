@@ -43,7 +43,7 @@ public class SwipeRightActivity extends WearableActivity {
             public void onClick(View v) {
                 // Send message to phone
                 Intent loadResultsOnPhoneIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
-                loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
+                //loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
                 startService(loadResultsOnPhoneIntent);
                 Log.e("SwipeRightActivity", "RESULT SENT TO SERVICE");
             }

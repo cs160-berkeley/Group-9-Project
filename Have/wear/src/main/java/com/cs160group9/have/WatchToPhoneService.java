@@ -44,17 +44,14 @@ public class WatchToPhoneService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e("WatchToPhoneService", "onStartCommand");
-        final Bundle extras = intent.getExtras();
+        Bundle extras = intent.getExtras();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mWatchApiClient.connect();
-                if (extras != null) {
-                    sendMessage("RESULT", "Result string");
-                    Log.e("WatchToPhoneService", "RESULT SEND MESSAGE");
-                }
-
+                sendMessage("RESULT", "Result string");
+                Log.e("WatchToPhoneService", "RESULT SEND MESSAGE");
 
             }
         }).start();
@@ -75,12 +72,8 @@ public class WatchToPhoneService extends Service {
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mWatchApiClient).await();
 
                 for (Node node : nodes.getNodes()) {
-                    try {
-                        MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                                mWatchApiClient, node.getId(), path, text.getBytes()).await();
-                    } catch (Exception e) {
-                        Log.e("Exception", e.toString());
-                    }
+                    MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
+                            mWatchApiClient, node.getId(), path, text.getBytes()).await();
 
                 }
             }
