@@ -3,6 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cs160group9.com.have.WelcomeActivity">
-
+    tools:context="cs160group9.com.have.WelcomeActivity"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="175dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/hlogo"
+        android:layout_marginBottom="50dp"/>
+    <Button
+        android:id="@+id/getStartedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_started"
+        style="@style/AccentButton"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

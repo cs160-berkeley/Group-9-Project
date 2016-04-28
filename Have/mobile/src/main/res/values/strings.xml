@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Have</string>
+    <string name="get_started">Get Started</string>
+    <string name="worried">Worried about your sexual health?</string>
+    <string name="medical_pro">Medical pro?</string>
 </resources>
