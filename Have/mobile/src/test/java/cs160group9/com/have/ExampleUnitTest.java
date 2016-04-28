@@ -1,4 +1,4 @@
-package com.cs160group9.have;
+package cs160group9.com.have;
 
 import org.junit.Test;
 
