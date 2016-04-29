@@ -1,4 +1,4 @@
-package com.cs160group9.have;
+package cs160group9.com.have;
 
 import android.app.Service;
 import android.content.Intent;
@@ -12,17 +12,17 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
-public class WatchToPhoneService extends Service {
+public class PhoneToWatchService extends Service {
 
-    private static String TAG = "WatchToPhoneService";
+    private static String TAG = "PhoneToWatchService";
 
-    private GoogleApiClient mWatchApiClient;
+    private GoogleApiClient mApiClient;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mWatchApiClient = new GoogleApiClient.Builder(this)
+        mApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
@@ -40,7 +40,7 @@ public class WatchToPhoneService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mWatchApiClient.disconnect();
+        mApiClient.disconnect();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class WatchToPhoneService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mWatchApiClient.connect();
+                mApiClient.connect();
 
                 if (extras != null) {
 
@@ -74,11 +74,10 @@ public class WatchToPhoneService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mWatchApiClient).await();
-
+                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                 for (Node node : nodes.getNodes()) {
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                            mWatchApiClient, node.getId(), path, text.getBytes()).await();
+                            mApiClient, node.getId(), path, text.getBytes()).await();
                 }
             }
         }).start();
