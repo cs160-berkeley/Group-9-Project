@@ -17,8 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RoleChoiceActivity"
+        <activity
+            android:name=".RoleChoiceActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PatientOnboardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ExpertOnboardActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.redbooth.WelcomePageLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/welcome_page_top_margin"
+    android:paddingLeft="@dimen/welcome_page_side_margin"
+    android:paddingRight="@dimen/welcome_page_side_margin"
+    android:gravity="center_horizontal">
+    <TextView
+        android:id="@+id/step_2_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/WelcomeHeaderText"
+        android:text="@string/step_2_prompt" />
+    <ListView
+        android:id="@+id/step_2_conditions_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step_2_prompt" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step_2_conditions_list">
+        <Button
+            android:id="@+id/step_2_nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AccentButton"
+            android:text="@string/next" />
+        <Button
+            android:id="@+id/step_2_backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/back" />
+    </LinearLayout>
+</com.redbooth.WelcomePageLayout>

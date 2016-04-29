@@ -3,6 +3,10 @@
     <color name="colorPrimary">#e76ba6</color>
     <color name="colorPrimaryDark">#c63078</color>
     <color name="colorAccent">#43d2b6</color>
-    <color name="lightTextColor">#FFF</color>
+    <color name="colorAccentLight">#6fffdf</color>
+    <color name="colorAccentTrans">#5543d2b6</color>
+    <color name="colorButtonText">#FFF</color>
+    <color name="colorLevel1TextLight">#57000000</color>
+    <color name="colorLevel2TextLight">#36000000</color>
     <color name="divider">#0c000000</color>
 </resources>

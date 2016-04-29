@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.redbooth.WelcomePageLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/welcome_page_top_margin"
+    android:paddingLeft="@dimen/welcome_page_side_margin"
+    android:paddingRight="@dimen/welcome_page_side_margin"
+    android:gravity="center_horizontal">
+    <TextView
+        android:id="@+id/step_1_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/WelcomeHeaderText"
+        android:text="@string/step_1_prompt" />
+    <EditText
+        android:id="@+id/step_1_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step_1_prompt"
+        android:hint="@string/symptoms_hint"
+        android:imeOptions="actionNext" />
+    <Button
+        android:id="@+id/step_1_nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step_1_field"
+        style="@style/AccentButton"
+        android:text="@string/next" />
+</com.redbooth.WelcomePageLayout>

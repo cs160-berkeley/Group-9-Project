@@ -15,7 +15,24 @@
 
     <style name="AccentButton">
         <item name="android:backgroundTint">@color/colorAccent</item>
-        <item name="android:textColor">@color/lightTextColor</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+    </style>
+
+    <style name="Header1Text">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/header1_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="Header2Text">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/header2_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="WelcomeHeaderText">
+        <item name="android:textSize">@dimen/header1_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
 </resources>

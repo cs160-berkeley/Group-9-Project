@@ -3,4 +3,11 @@
     <string name="get_started">Get Started</string>
     <string name="worried">Worried about your sexual health?</string>
     <string name="medical_pro">Medical pro?</string>
+    <string name="patient">I\'m a Patient</string>
+    <string name="expert">I\'m an Expert</string>
+    <string name="step_1_prompt">I\'m worried about...</string>
+    <string name="next">Next</string>
+    <string name="symptoms_hint">Enter your symptoms...</string>
+    <string name="back">Back</string>
+    <string name="step_2_prompt">I think I might have...</string>
 </resources>
