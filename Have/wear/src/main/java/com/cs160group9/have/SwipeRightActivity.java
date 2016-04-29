@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cs160group9.com.have.R;
-
 public class SwipeRightActivity extends WearableActivity {
 
     private static final int SPEECH_REQUEST_CODE = 0;

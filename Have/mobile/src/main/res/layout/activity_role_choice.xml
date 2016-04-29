@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cs160group9.com.have.RoleChoiceActivity"
+    tools:context="com.cs160group9.have.RoleChoiceActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal">
     <ImageView

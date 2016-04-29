@@ -4,8 +4,6 @@ package com.cs160group9.have;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
-import cs160group9.com.have.R;
-
 public class SwipeUpActivity extends WearableActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

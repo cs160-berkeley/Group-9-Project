@@ -1,4 +1,4 @@
-package cs160group9.com.have;
+package com.cs160group9.have;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

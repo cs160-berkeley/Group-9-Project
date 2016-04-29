@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cs160group9.com.have">
+    package="com.cs160group9.have">
 
     <application
         android:allowBackup="true"

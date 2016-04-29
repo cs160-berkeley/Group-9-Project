@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cs160group9.com.have">
+    package="com.cs160group9.have">
 
     <uses-feature android:name="android.hardware.type.watch" />
     <application

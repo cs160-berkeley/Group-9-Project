@@ -6,8 +6,6 @@ import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 
-import cs160group9.com.have.R;
-
 public class MainActivity extends WearableActivity {
 
     private BoxInsetLayout mContainerView;
