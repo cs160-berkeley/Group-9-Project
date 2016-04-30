@@ -1,4 +1,4 @@
-package cs160group9.com.have;
+package com.cs160group9.have;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;

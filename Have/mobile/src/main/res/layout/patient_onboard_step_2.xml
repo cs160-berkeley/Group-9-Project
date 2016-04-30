@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         style="@style/WelcomeHeaderText"
         android:text="@string/step_2_prompt" />
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/step_2_conditions_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
