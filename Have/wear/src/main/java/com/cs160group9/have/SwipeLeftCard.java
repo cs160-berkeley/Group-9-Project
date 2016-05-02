@@ -1,35 +1,46 @@
 package com.cs160group9.have;
 
-
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.wearable.activity.WearableActivity;
+import android.support.v4.app.Fragment;
+import android.support.wearable.view.CardFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cs160group9.common.PatientRequest;
+
 import java.util.List;
 
-public class SwipeLeftActivity extends WearableActivity {
+public class SwipeLeftCard extends Fragment {
 
     private static final int SPEECH_REQUEST_CODE = 0;
+
+    private PatientRequest patientRequest;
+
     private Button recordButton;
     private Button submitButton;
     private TextView recordResponseText;
     private ImageView backgroundImage;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_swipe_left);
+    public SwipeLeftCard(PatientRequest p) {
+        this.patientRequest = p;
+    }
 
-        recordButton = (Button) findViewById(R.id.record_btn);
-        recordResponseText = (TextView) findViewById(R.id.response_text);
-        backgroundImage = (ImageView) findViewById(R.id.background_img);
-        submitButton = (Button) findViewById(R.id.submit_btn);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.activity_swipe_left, container, false);
+
+        recordButton = (Button) root.findViewById(R.id.record_btn);
+        recordResponseText = (TextView) root.findViewById(R.id.response_text);
+        backgroundImage = (ImageView) root.findViewById(R.id.background_img);
+        submitButton = (Button) root.findViewById(R.id.submit_btn);
 
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,13 +52,14 @@ public class SwipeLeftActivity extends WearableActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loadResultsOnPhoneIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
+                Intent loadResultsOnPhoneIntent = new Intent(getActivity(), WatchToPhoneService.class);
                 loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
-                startService(loadResultsOnPhoneIntent);
+                getActivity().startService(loadResultsOnPhoneIntent);
                 Log.e("SwipeLeftActivity", "RESULT SENT TO SERVICE");
             }
         });
 
+        return root;
     }
 
     // Create an intent that can start the Speech Recognizer activity
@@ -62,9 +74,9 @@ public class SwipeLeftActivity extends WearableActivity {
     // This callback is invoked when the Speech Recognizer returns.
     // This is where you process the intent and extract the speech text from the intent.
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             List<String> results = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);
             String spokenText = results.get(0);
