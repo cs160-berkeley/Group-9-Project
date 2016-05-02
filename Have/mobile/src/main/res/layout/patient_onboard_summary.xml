@@ -1,64 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.redbooth.WelcomePageLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.redbooth.WelcomePageLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/welcome_summary_top_margin"
-    android:paddingLeft="@dimen/welcome_page_side_margin"
-    android:paddingRight="@dimen/welcome_page_side_margin"
     android:gravity="center_horizontal">
     <LinearLayout
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/summary_header"
-            style="@style/Header2Text"
-            android:textAlignment="center" />
-        <View style="@style/divider" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/step_1_prompt" />
-        <TextView
-            android:id="@+id/summary_symptoms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View style="@style/divider" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/step_2_prompt" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/summary_conditions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View style="@style/divider" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/step_3_prompt_summary" />
-        <ImageView
-            android:id="@+id/summary_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View style="@style/divider" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+                <TextView
+                    style="@style/Header2Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summary_header"
+                    android:textAlignment="center" />
+
+                <View style="@style/divider" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_1_prompt" />
+
+                <TextView
+                    android:id="@+id/summary_symptoms"
+                    style="@style/Level1Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
+
+                <View style="@style/divider" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_2_prompt" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/summary_conditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View style="@style/divider" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_3_prompt_summary" />
+
+                <ImageView
+                    android:id="@+id/summary_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+        </ScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="@dimen/activity_horizontal_margin">
+
             <Button
                 android:id="@+id/summary_submitButton"
+                style="@style/AccentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/AccentButton"
                 android:text="@string/submit" />
+
             <Button
                 android:id="@+id/summary_backButton"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/back" />
         </LinearLayout>
     </LinearLayout>

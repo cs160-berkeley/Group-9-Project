@@ -3,6 +3,7 @@ package com.cs160group9.have;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
@@ -55,11 +57,12 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
 
     private ArrayList<Bitmap> photos;
 
+    private PhotosListViewHolder currentPhotoHolder;
+
     private WelcomeCoordinatorLayout welcomeCoordinator;
     private Button step2NextButton;
     private Button step3NextButton;
 
-    // TODO: fix back button handling (`onBackPressed`)
     // TODO: fix disabled button style
 
     @Override
@@ -108,6 +111,7 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
                 activity.welcomeCoordinator.setCurrentPage(1, true);
                 activity.setSymptoms(step1Field.getText().toString());
                 activity.hideSoftKeyBoard();
+                step1Field.clearFocus();
             }
         });
         step1Field.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -120,6 +124,7 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
                         activity.welcomeCoordinator.setCurrentPage(1, true);
                         activity.setSymptoms(step1Field.getText().toString());
                         activity.hideSoftKeyBoard();
+                        step1Field.clearFocus();
                     }
                     handled = true;
                 }
@@ -199,9 +204,18 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
         RecyclerView conditions = (RecyclerView) this.findViewById(R.id.summary_conditions);
         assert conditions != null;
         conditions.setAdapter(this.summaryConditionsAdapter);
-        conditions.setLayoutManager(new LinearLayoutManager(this));
+        conditions.setLayoutManager(new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
-
+        byte[] photoArray = Base64.decode(this.request.get("photo").getAsString(), 0);
+        Bitmap photo = BitmapFactory.decodeByteArray(photoArray, 0, photoArray.length);
+        ImageView photoView = (ImageView) this.findViewById(R.id.summary_photo);
+        assert photoView != null;
+        photoView.setImageBitmap(photo);
 
         Button summarySubmitButton = (Button) this.findViewById(R.id.summary_submitButton);
         assert summarySubmitButton != null;
@@ -430,6 +444,13 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
         @Override
         public void onClick(View v) {
             activity.setPhoto(this.photo);
+            if (activity.currentPhotoHolder != null) activity.currentPhotoHolder.unhighlight();
+            activity.currentPhotoHolder = this;
+            this.img.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+        }
+
+        private void unhighlight() {
+            this.img.setBackgroundColor(0);
         }
     }
 
