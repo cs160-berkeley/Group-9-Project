@@ -1,6 +1,12 @@
 {
   "conditions": [
-    {"name": "paulositis"},
-    {"name": "erictosis"}
+    {
+      "name": "paulositis",
+      "symptoms": "some stuff I dunno"
+    },
+    {
+      "name": "erictosis",
+      "symptoms": "super bad"
+    }
   ]
 }

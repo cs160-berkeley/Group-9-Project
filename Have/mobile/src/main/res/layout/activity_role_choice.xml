@@ -12,12 +12,7 @@
         android:layout_height="125dp"
         android:scaleType="centerInside"
         android:src="@drawable/hlogo" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@color/divider" />
+    <View style="@style/divider" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,12 +25,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/AccentButton"
         android:text="@string/patient" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@color/divider" />
+    <View style="@style/divider" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

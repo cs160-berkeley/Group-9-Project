@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,9 +20,13 @@
         <activity
             android:name=".RoleChoiceActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PatientOnboardActivity"
+        <activity
+            android:name=".PatientOnboardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ExpertOnboardActivity"></activity>
+        <activity android:name=".ExpertOnboardActivity" />
+        <activity android:name=".PatientSubmitActivity" />
+        <activity android:name=".ViewRequestActivity" />
+        <activity android:name=".ResponseReceivedActivity"></activity>
     </application>
 
 </manifest>

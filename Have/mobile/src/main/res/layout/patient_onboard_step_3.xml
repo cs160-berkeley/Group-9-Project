@@ -23,11 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/step_3_photos_list">
         <Button
-            android:id="@+id/step_3_SubmitButton"
+            android:id="@+id/step_3_nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/AccentButton"
-            android:text="@string/submit"
+            android:text="@string/next"
             android:enabled="false" />
         <Button
             android:id="@+id/step_3_backButton"

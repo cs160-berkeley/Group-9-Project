@@ -6,6 +6,8 @@
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="2dp"
+        android:cropToPadding="true"
         android:scaleType="centerCrop"
         android:background="@android:color/transparent" />
 </FrameLayout>

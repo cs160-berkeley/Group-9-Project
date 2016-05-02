@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cs160group9.have.PatientSubmitActivity"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/pending"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/request_pending"
+        style="@style/Header1Text"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/notify_consensus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pending"
+        android:text="@string/notify_consensus"
+        style="@style/Header2Text"
+        android:textAlignment="center" />
+    <Button
+        android:id="@+id/requestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notify_consensus"
+        android:layout_centerHorizontal="true"
+        style="@style/AccentButton"
+        android:text="@string/request_button" />
+</RelativeLayout>
