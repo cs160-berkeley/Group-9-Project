@@ -23,15 +23,12 @@ public class MainViewWatchAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int pos) {
-        Fragment fragment = null;
-
         switch(pos) {
-            case 0: fragment = new SwipeLeftCard(patientRequest);
-            case 1: fragment = new PatientRequestInfoCard(patientRequest);
-            case 2: fragment = new SwipeRightCard(patientRequest);
+            case 0: return new SwipeRightCard(patientRequest);
+            case 1: return new PatientRequestInfoCard(patientRequest);
+            case 2: return new SwipeLeftCard(patientRequest);
         }
-
-        return fragment;
+        return null;
     }
 
     @Override
