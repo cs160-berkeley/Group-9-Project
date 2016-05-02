@@ -30,9 +30,25 @@
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
+    <style name="Level1Text">
+        <item name="android:textColor">@color/colorLevel1TextLight</item>
+    </style>
+
+    <style name="Level2Text">
+        <item name="android:textColor">@color/colorLevel2TextLight</item>
+    </style>
+
     <style name="WelcomeHeaderText">
         <item name="android:textSize">@dimen/header1_text_size</item>
         <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:background">@color/divider</item>
     </style>
 
 </resources>

@@ -7,33 +7,59 @@
     android:paddingLeft="@dimen/welcome_page_side_margin"
     android:paddingRight="@dimen/welcome_page_side_margin"
     android:gravity="center_horizontal">
-    <!--<TextView-->
-        <!--android:id="@+id/step_3_prompt"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--style="@style/WelcomeHeaderText"-->
-        <!--android:text="@string/step_3_prompt" />-->
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/step_3_photos_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/step_2_prompt" />-->
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/step_2_conditions_list">-->
-        <!--<Button-->
-            <!--android:id="@+id/step_3_SubmitButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--style="@style/AccentButton"-->
-            <!--android:text="@string/submit"-->
-            <!--android:enabled="false" />-->
-        <!--<Button-->
-            <!--android:id="@+id/step_3_backButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--style="?android:attr/borderlessButtonStyle"-->
-            <!--android:text="@string/back" />-->
-    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summary_header"
+            style="@style/Header2Text"
+            android:textAlignment="center" />
+        <View style="@style/divider" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/step_1_prompt" />
+        <TextView
+            android:id="@+id/summary_symptoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View style="@style/divider" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/step_2_prompt" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/summary_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View style="@style/divider" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/step_3_prompt_summary" />
+        <ImageView
+            android:id="@+id/summary_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View style="@style/divider" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/summary_submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AccentButton"
+                android:text="@string/submit" />
+            <Button
+                android:id="@+id/summary_backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="@string/back" />
+        </LinearLayout>
+    </LinearLayout>
 </com.redbooth.WelcomePageLayout>

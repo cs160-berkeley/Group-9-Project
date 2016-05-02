@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Have</string>
+    <string name="app_name">have?</string>
     <string name="get_started">Get Started</string>
     <string name="worried">Worried about your sexual health?</string>
     <string name="medical_pro">Medical pro?</string>
@@ -13,4 +13,9 @@
     <string name="none">None of these</string>
     <string name="step_3_prompt">Choose a photo</string>
     <string name="submit">Submit</string>
+    <string name="summary_header">Ready to submit!</string>
+    <string name="step_3_prompt_summary">I chose a photo...</string>
+    <string name="notify_consensus">We\'ll notify you when your Experts reach a consensus.</string>
+    <string name="request_pending">Your request is pending!</string>
+    <string name="request_button">See Request</string>
 </resources>

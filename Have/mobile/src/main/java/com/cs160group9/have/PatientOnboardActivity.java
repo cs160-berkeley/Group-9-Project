@@ -1,9 +1,10 @@
 package com.cs160group9.have;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,8 +25,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
@@ -33,15 +33,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.redbooth.WelcomeCoordinatorLayout;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Map;
 
-public class PatientOnboardActivity extends AppCompatActivity {
+public class PatientOnboardActivity extends AppCompatActivity implements RequestProvider {
     private static final String TAG = "PatientOnboardActivity";
 
     private PatientOnboardActivity activity = this;
@@ -53,6 +57,7 @@ public class PatientOnboardActivity extends AppCompatActivity {
 
     private WelcomeCoordinatorLayout welcomeCoordinator;
     private Button step2NextButton;
+    private Button step3NextButton;
 
     // TODO: fix back button handling (`onBackPressed`)
     // TODO: fix disabled button style
@@ -61,6 +66,8 @@ public class PatientOnboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_patient_onboard);
+
+        if (this.requestExists()) this.goToSubmitted();
 
         // load conditions list
         this.conditions = loadJsonFromResource(R.raw.conditions)
@@ -93,15 +100,16 @@ public class PatientOnboardActivity extends AppCompatActivity {
         // set up first page (symptoms entry)
         final Button step1NextButton = (Button) this.findViewById(R.id.step_1_nextButton);
         assert step1NextButton != null;
+        final EditText step1Field = (EditText) findViewById(R.id.step_1_field);
+        assert step1Field != null;
         step1NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.welcomeCoordinator.setCurrentPage(1, true);
+                activity.setSymptoms(step1Field.getText().toString());
                 activity.hideSoftKeyBoard();
             }
         });
-        final EditText step1Field = (EditText) findViewById(R.id.step_1_field);
-        assert step1Field != null;
         step1Field.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -110,6 +118,7 @@ public class PatientOnboardActivity extends AppCompatActivity {
                     Log.d(TAG, "onEditorAction: " + step1Field.getText());
                     if (step1Field.getText().length() > 0) {
                         activity.welcomeCoordinator.setCurrentPage(1, true);
+                        activity.setSymptoms(step1Field.getText().toString());
                         activity.hideSoftKeyBoard();
                     }
                     handled = true;
@@ -162,11 +171,12 @@ public class PatientOnboardActivity extends AppCompatActivity {
         step3PhotosList.setLayoutManager(new GridLayoutManager(this, 3));
         step3PhotosList.addItemDecoration(new GridSpacingItemDecoration(3, 20, true));
 
-        Button step3SubmitButton = (Button) this.findViewById(R.id.step_3_SubmitButton);
-        assert step3SubmitButton != null;
-        step3SubmitButton.setOnClickListener(new View.OnClickListener() {
+        this.step3NextButton = (Button) this.findViewById(R.id.step_3_nextButton);
+        assert this.step3NextButton != null;
+        this.step3NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                activity.makeSummary();
                 activity.welcomeCoordinator.setCurrentPage(3, true);
             }
         });
@@ -180,9 +190,63 @@ public class PatientOnboardActivity extends AppCompatActivity {
         });
     }
 
+    private void makeSummary() {
+        Log.d(TAG, "makeSummary: " + this.request.has("symptoms"));
+        TextView symptoms = (TextView) this.findViewById(R.id.summary_symptoms);
+        assert symptoms != null;
+        symptoms.setText(this.request.get("symptoms").getAsString());
+
+        RecyclerView conditions = (RecyclerView) this.findViewById(R.id.summary_conditions);
+        assert conditions != null;
+        conditions.setAdapter(this.summaryConditionsAdapter);
+        conditions.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        Button summarySubmitButton = (Button) this.findViewById(R.id.summary_submitButton);
+        assert summarySubmitButton != null;
+        summarySubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.saveRequest();
+                activity.goToSubmitted();
+            }
+        });
+
+        Button summaryBackButton = (Button) this.findViewById(R.id.summary_backButton);
+        assert summaryBackButton != null;
+        summaryBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.welcomeCoordinator.setCurrentPage(2, true);
+            }
+        });
+    }
+
+    private void saveRequest() {
+        SharedPreferences store = this.getSharedPreferences("request", 0);
+        SharedPreferences.Editor editor = store.edit();
+        editor.putString("request", this.request.toString());
+        editor.apply();
+    }
+
+    private boolean requestExists() {
+        return this.getSharedPreferences("request", 0).contains("request");
+    }
+
+    private void goToSubmitted() {
+        Intent intent = new Intent(activity, PatientSubmitActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
-        if (this.welcomeCoordinator.getPageSelected() == 0) super.onBackPressed();
+        int currentPage = this.welcomeCoordinator.getPageSelected();
+        if (currentPage == 0) super.onBackPressed();
+        else this.welcomeCoordinator.setCurrentPage(currentPage - 1, true);
     }
 
     // http://stackoverflow.com/a/18858246
@@ -194,6 +258,11 @@ public class PatientOnboardActivity extends AppCompatActivity {
         }
     }
 
+    private void setSymptoms(String text) {
+        if (this.request.has("symptoms")) this.request.remove("symptoms");
+        this.request.addProperty("symptoms", text);
+    }
+
     private void addCondition(JsonObject condition) {
         JsonArray conditions = this.request.get("selectedConditions").getAsJsonArray();
         conditions.add(condition);
@@ -203,6 +272,17 @@ public class PatientOnboardActivity extends AppCompatActivity {
         JsonArray conditions = this.request.get("selectedConditions").getAsJsonArray();
         conditions.remove(condition);
         if (conditions.size() == 0) this.step2NextButton.setEnabled(false);
+    }
+
+    private void setPhoto(Bitmap photo) {
+        if (this.request.has("photo")) this.request.remove("photo");
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] bitMapData = stream.toByteArray();
+
+        this.request.addProperty("photo", Base64.encodeToString(bitMapData, Base64.DEFAULT));
+        this.step3NextButton.setEnabled(true);
     }
 
     private JsonElement loadJsonFromResource(int id) {
@@ -252,6 +332,11 @@ public class PatientOnboardActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public JsonObject getRequest() {
+        return this.request;
+    }
+
     class ConditionsListViewHolder extends RecyclerView.ViewHolder
             implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
         private JsonObject condition;
@@ -276,7 +361,7 @@ public class PatientOnboardActivity extends AppCompatActivity {
             this.condition = condition;
 
             this.name.setText(this.condition.get("name").getAsString());
-            // TODO: symptoms
+            this.symptoms.setText(this.condition.get("symptoms").getAsString());
         }
 
         @Override
@@ -324,17 +409,27 @@ public class PatientOnboardActivity extends AppCompatActivity {
         }
     };
 
-    private class PhotosListViewHolder extends RecyclerView.ViewHolder {
+    private class PhotosListViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
+        private Bitmap photo;
+
         private ImageButton img;
 
         public PhotosListViewHolder(View itemView) {
             super(itemView);
 
             this.img = (ImageButton) itemView.findViewById(R.id.photo);
+            itemView.findViewById(R.id.photo).setOnClickListener(this);
         }
 
         public void setPhoto(Bitmap photo) {
-            this.img.setImageBitmap(photo);
+            this.photo = photo;
+            this.img.setImageBitmap(this.photo);
+        }
+
+        @Override
+        public void onClick(View v) {
+            activity.setPhoto(this.photo);
         }
     }
 
@@ -351,25 +446,30 @@ public class PatientOnboardActivity extends AppCompatActivity {
         }
 
         @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        public void getItemOffsets(Rect outRect,
+                                   View view,
+                                   RecyclerView parent,
+                                   RecyclerView.State state) {
             int position = parent.getChildAdapterPosition(view); // item position
             int column = position % spanCount; // item column
 
             if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+                outRect.left = spacing - column * spacing / spanCount;
+                outRect.right = (column + 1) * spacing / spanCount;
 
                 if (position < spanCount) { // top edge
                     outRect.top = spacing;
                 }
                 outRect.bottom = spacing; // item bottom
             } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                outRect.left = column * spacing / spanCount;
+                outRect.right = spacing - (column + 1) * spacing / spanCount;
                 if (position >= spanCount) {
                     outRect.top = spacing; // item top
                 }
             }
         }
     }
+
+    private SummaryConditionsAdapter summaryConditionsAdapter = new SummaryConditionsAdapter(this);
 }
