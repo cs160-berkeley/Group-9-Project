@@ -2,29 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ScrollView
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:src="@drawable/dummy_pic"
-                android:id="@+id/patient_img"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@drawable/dummy_pic"
+        android:id="@+id/patient_img"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/patient_img"
-                android:gravity="center"
-                android:text="Bumps, sores"
-                android:id="@+id/patient_symptoms"/>
-        </RelativeLayout>
-
-    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:lines="3"
+        android:text="Patient Input\nSymptoms: Example symptoms\nConditions: Example conditions"
+        android:id="@+id/patient_info"
+        android:background="@color/grey"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>
