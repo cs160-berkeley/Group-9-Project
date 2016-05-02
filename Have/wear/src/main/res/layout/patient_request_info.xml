@@ -2,19 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:src="@drawable/dummy_pic"
-        android:id="@+id/patient_img"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/dummy_pic"
+                android:id="@+id/patient_img"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/patient_img"
-        android:gravity="center"
-        android:text="Bumps, sores"
-        android:id="@+id/patient_symptoms"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/patient_img"
+                android:gravity="center"
+                android:text="Bumps, sores"
+                android:id="@+id/patient_symptoms"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>
