@@ -27,8 +27,8 @@ public class ResponseReceivedActivity extends AppCompatActivity {
 //                .getAsJsonObject();
         this.response = new JsonObject();
         JsonArray conditions = new JsonArray();
-        conditions.add(new JsonParser().parse("{'name': 'paulositis'}"));
-        conditions.add(new JsonParser().parse("{'name': 'erictosis'}"));
+        conditions.add(new JsonParser().parse("{'name': 'herpes'}"));
+        conditions.add(new JsonParser().parse("{'name': 'syphilis'}"));
         this.response.add("conditions", conditions);
         this.response.addProperty("positive", false);
 
@@ -47,7 +47,7 @@ public class ResponseReceivedActivity extends AppCompatActivity {
                             (conditions.size() > 2 ? ", or " : " or "))
                     : " ").append(o.get("name").getAsString());
         }
-        result.append(".");
+        result.append(".\n\nHere's what they said: \"That looks distinctly like eczema, a common skin condition.\"");
         received.setText(result.toString());
 
         Button requestButton = (Button) this.findViewById(R.id.requestButton);

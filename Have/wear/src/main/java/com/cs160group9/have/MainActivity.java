@@ -40,8 +40,8 @@ public class MainActivity extends FragmentActivity {
         }
 
         PatientRequest dummyRequest = new PatientRequest();
-        dummyRequest.symptoms = "Blisters, sores";
-        dummyRequest.conditionsList = new String[]{"Herpes", "Syphilis"};
+        dummyRequest.symptoms = "little red bumps on skin";
+        dummyRequest.conditionsList = new String[]{"herpes", "syphilis"};
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.dummy_pic);
         Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();

@@ -1,12 +1,12 @@
 {
   "conditions": [
     {
-      "name": "paulositis",
-      "symptoms": "some stuff I dunno"
+      "name": "herpes",
+      "symptoms": "pain, itching, small sores, ulcers, scabs"
     },
     {
-      "name": "erictosis",
-      "symptoms": "super bad"
+      "name": "syphilis",
+      "symptoms": "rashes, small bumps, ulcers, discharge"
     }
   ]
 }

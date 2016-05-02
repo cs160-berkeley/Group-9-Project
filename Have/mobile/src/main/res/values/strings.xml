@@ -18,7 +18,7 @@
     <string name="notify_consensus">We\'ll notify you when your Experts reach a consensus.</string>
     <string name="request_pending">Your request is pending!</string>
     <string name="request_button">See Request</string>
-    <string name="received">Consensus Reached!</string>
+    <string name="received">Response received!</string>
     <string name="negative">You can breathe easy! Your Experts think it\'s unlikely that you have</string>
     <string name="positive">Uh oh! Your Experts think you might have</string>
 </resources>
