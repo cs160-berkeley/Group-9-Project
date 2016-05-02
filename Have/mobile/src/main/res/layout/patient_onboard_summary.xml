@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.redbooth.WelcomePageLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/welcome_summary_top_margin"
+    android:paddingLeft="@dimen/welcome_page_side_margin"
+    android:paddingRight="@dimen/welcome_page_side_margin"
+    android:gravity="center_horizontal">
+    <!--<TextView-->
+        <!--android:id="@+id/step_3_prompt"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/WelcomeHeaderText"-->
+        <!--android:text="@string/step_3_prompt" />-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/step_3_photos_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/step_2_prompt" />-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/step_2_conditions_list">-->
+        <!--<Button-->
+            <!--android:id="@+id/step_3_SubmitButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/AccentButton"-->
+            <!--android:text="@string/submit"-->
+            <!--android:enabled="false" />-->
+        <!--<Button-->
+            <!--android:id="@+id/step_3_backButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="?android:attr/borderlessButtonStyle"-->
+            <!--android:text="@string/back" />-->
+    <!--</LinearLayout>-->
+</com.redbooth.WelcomePageLayout>

@@ -10,5 +10,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:indicatorUnselected="@android:color/transparent"
-        app:indicatorSelected="@android:color/transparent"/>
+        app:indicatorSelected="@android:color/transparent" />
 </RelativeLayout>

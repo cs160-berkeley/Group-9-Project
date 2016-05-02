@@ -5,8 +5,9 @@
     <color name="colorAccent">#43d2b6</color>
     <color name="colorAccentLight">#6fffdf</color>
     <color name="colorAccentTrans">#5543d2b6</color>
-    <color name="colorButtonText">#FFF</color>
-    <color name="colorLevel1TextLight">#57000000</color>
-    <color name="colorLevel2TextLight">#36000000</color>
+    <color name="colorButtonText">#fff</color>
+    <color name="colorLevel1TextLight">#de000000</color>
+    <color name="colorLevel2TextLight">#8a000000</color>
+    <color name="colorLevel3TextLight">#61000000</color>
     <color name="divider">#0c000000</color>
 </resources>

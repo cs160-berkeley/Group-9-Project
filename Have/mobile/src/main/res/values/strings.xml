@@ -10,4 +10,7 @@
     <string name="symptoms_hint">Enter your symptoms...</string>
     <string name="back">Back</string>
     <string name="step_2_prompt">I think I might have...</string>
+    <string name="none">None of these</string>
+    <string name="step_3_prompt">Choose a photo</string>
+    <string name="submit">Submit</string>
 </resources>

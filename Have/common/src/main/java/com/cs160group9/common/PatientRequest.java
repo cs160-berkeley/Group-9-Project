@@ -10,4 +10,3 @@ public class PatientRequest {
     public PatientRequest() {}
 
 }
-

@@ -6,4 +6,5 @@
     <dimen name="header2_text_size">24sp</dimen>
     <dimen name="welcome_page_top_margin">150dp</dimen>
     <dimen name="welcome_page_side_margin">24dp</dimen>
+    <dimen name="welcome_summary_top_margin">24dp</dimen>
 </resources>

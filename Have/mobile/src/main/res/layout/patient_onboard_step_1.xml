@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/step_1_prompt"
         android:hint="@string/symptoms_hint"
+        android:inputType="text"
         android:imeOptions="actionNext" />
     <Button
         android:id="@+id/step_1_nextButton"
@@ -26,5 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/step_1_field"
         style="@style/AccentButton"
-        android:text="@string/next" />
+        android:text="@string/next"
+        android:enabled="false" />
 </com.redbooth.WelcomePageLayout>
