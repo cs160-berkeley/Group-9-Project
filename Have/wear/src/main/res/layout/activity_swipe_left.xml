@@ -6,14 +6,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RECORD"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/record_btn"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="SUBMIT"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -32,6 +24,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/left_swipe_response"
-        android:id="@+id/background_img"/>
+        android:id="@+id/background_img"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/record_btn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        android:id="@+id/record_btn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="72dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:visibility="visible"
+        android:alpha="0"
+        android:allowUndo="true" />
 
 </RelativeLayout>
