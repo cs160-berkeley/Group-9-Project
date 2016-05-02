@@ -25,7 +25,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ExpertOnboardActivity" />
         <activity android:name=".PatientSubmitActivity" />
-        <activity android:name=".ViewRequestActivity"></activity>
+        <activity android:name=".ViewRequestActivity" />
+        <activity android:name=".ResponseReceivedActivity"></activity>
     </application>
 
 </manifest>
