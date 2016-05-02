@@ -24,6 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_welcome);
 
         SharedPreferences prefs = this.getSharedPreferences("request", 0);
+//        prefs.edit().remove("request").commit();
         if (prefs.contains("request")) this.goToSubmitted();
 
         Button getStartedButton = (Button) this.findViewById(R.id.getStartedButton);

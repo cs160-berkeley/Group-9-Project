@@ -20,7 +20,7 @@ public class PatientSubmitActivity extends AppCompatActivity {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.startActivity(new Intent(activity, ViewRequestActivity.class));
+                activity.startActivity(new Intent(activity, ResponseReceivedActivity.class));
             }
         });
     }

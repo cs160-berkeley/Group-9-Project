@@ -82,11 +82,11 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
 
         // TODO: load photos
         this.photos = new ArrayList<>();
-        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
-        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
-        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
-        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
-        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
+        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.gross)).getBitmap());
+        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.monica)).getBitmap());
+        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.whitewater)).getBitmap());
+        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hrc)).getBitmap());
+        this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.selfie)).getBitmap());
         this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
         this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
 

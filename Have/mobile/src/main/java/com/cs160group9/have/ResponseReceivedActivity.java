@@ -22,20 +22,30 @@ public class ResponseReceivedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_response_received);
 
-        this.response = new JsonParser()
-                .parse(this.getSharedPreferences("response", 0).getString("response", ""))
-                .getAsJsonObject();
+//        this.response = new JsonParser()
+//                .parse(this.getSharedPreferences("response", 0).getString("response", ""))
+//                .getAsJsonObject();
+        this.response = new JsonObject();
+        JsonArray conditions = new JsonArray();
+        conditions.add(new JsonParser().parse("{'name': 'paulositis'}"));
+        conditions.add(new JsonParser().parse("{'name': 'erictosis'}"));
+        this.response.add("conditions", conditions);
+        this.response.addProperty("positive", false);
 
         boolean positive = this.response.get("positive").getAsBoolean();
-        JsonArray conditions = this.response.get("conditions").getAsJsonArray();
+//        JsonArray conditions = this.response.get("conditions").getAsJsonArray();
 
-        TextView received = (TextView) this.findViewById(R.id.received);
+        TextView received = (TextView) this.findViewById(R.id.got_consensus);
         assert received != null;
         StringBuilder result = new StringBuilder(positive ?
                 this.getString(R.string.positive) : this.getString(R.string.negative));
         if (positive) result.append(conditions.get(0).getAsJsonObject().get("name").getAsString());
-        else for (JsonElement e : conditions) {
-            result.append(" ").append(e.getAsJsonObject().get("name").getAsString());
+        else for (int i = 0; i < conditions.size(); i ++) {
+            JsonObject o = conditions.get(i).getAsJsonObject();
+            result.append(i > 0 ?
+                    (i < conditions.size() - 1 ? ", " :
+                            (conditions.size() > 2 ? ", or " : " or "))
+                    : " ").append(o.get("name").getAsString());
         }
         result.append(".");
         received.setText(result.toString());
