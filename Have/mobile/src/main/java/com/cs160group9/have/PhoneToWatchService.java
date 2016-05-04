@@ -15,8 +15,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class PhoneToWatchService extends Service {
-
     private static String TAG = "PhoneToWatchService";
+
+    private PhoneToWatchService service = this;
 
     private GoogleApiClient mApiClient;
     private JsonObject request;
@@ -38,10 +39,7 @@ public class PhoneToWatchService extends Service {
                     }
                 })
                 .build();
-
-        this.request = new JsonParser()
-                .parse(this.getSharedPreferences("request", 0).getString("request", ""))
-                .getAsJsonObject();
+        mApiClient.connect();
     }
 
     @Override
@@ -52,9 +50,16 @@ public class PhoneToWatchService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        final Bundle extras = intent.getExtras();
+        this.request = new JsonParser()
+                .parse(this.getSharedPreferences("request", 0).getString("request", ""))
+                .getAsJsonObject();
 
-        this.sendMessage("/request", this.request.toString());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                service.sendMessage("request", service.request.toString());
+            }
+        }).start();
 
         return START_STICKY;
     }
@@ -69,11 +74,11 @@ public class PhoneToWatchService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mApiClient.connect();
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                 for (Node node : nodes.getNodes()) {
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
                             mApiClient, node.getId(), path, text.getBytes()).await();
+                    Log.d(TAG, "run: sent");
                 }
             }
         }).start();
