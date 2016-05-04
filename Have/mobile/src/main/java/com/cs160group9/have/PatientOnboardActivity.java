@@ -35,17 +35,20 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.redbooth.WelcomeCoordinatorLayout;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Map;
+
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class PatientOnboardActivity extends AppCompatActivity implements RequestProvider {
     private static final String TAG = "PatientOnboardActivity";
@@ -58,6 +61,7 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
     private ArrayList<Bitmap> photos;
 
     private PhotosListViewHolder currentPhotoHolder;
+    private ArrayList<PhotosListViewHolder> viewHolders;
 
     private WelcomeCoordinatorLayout welcomeCoordinator;
     private Button step2NextButton;
@@ -89,6 +93,8 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
         this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.selfie)).getBitmap());
         this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
         this.photos.add(((BitmapDrawable) this.getResources().getDrawable(R.drawable.hand)).getBitmap());
+
+        this.viewHolders = new ArrayList<>();
 
         // set up WelcomeCoordinatorLayout (wizard UI)
         this.welcomeCoordinator =
@@ -401,12 +407,13 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
         public void onBindViewHolder(PhotosListViewHolder holder, int position) {
             if (position > 0) {
                 Bitmap photo = activity.photos.get(position - 1);
-                holder.setPhoto(photo);
+                holder.bind(photo, position);
             } else {
-                holder.setPhoto(
+                holder.bind(
                         ((BitmapDrawable) activity.getResources()
                                 .getDrawable(R.drawable.newphoto))
-                        .getBitmap()
+                        .getBitmap(),
+                        position
                 );
             }
         }
@@ -425,9 +432,11 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
 
     private class PhotosListViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
-        private Bitmap photo;
-
         private ImageButton img;
+
+        private Bitmap photo;
+        private int position;
+        private boolean selected;
 
         public PhotosListViewHolder(View itemView) {
             super(itemView);
@@ -436,22 +445,63 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
             itemView.findViewById(R.id.photo).setOnClickListener(this);
         }
 
-        public void setPhoto(Bitmap photo) {
+        public void bind(Bitmap photo, int position) {
             this.photo = photo;
+            this.position = position;
+            while (activity.viewHolders.size() <= position) activity.viewHolders.add(null);
+            activity.viewHolders.set(position, this);
             this.img.setImageBitmap(this.photo);
+            if (this.selected) this.select();
         }
 
         @Override
         public void onClick(View v) {
-            activity.setPhoto(this.photo);
-            if (activity.currentPhotoHolder != null) activity.currentPhotoHolder.unhighlight();
-            activity.currentPhotoHolder = this;
-            this.img.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+            if (this.position > 0) {
+                this.select();
+            } else {
+                EasyImage.openCamera(activity, 0);
+            }
         }
 
-        private void unhighlight() {
-            this.img.setBackgroundColor(0);
+        private void select() {
+            if (this.position > 0) {
+                activity.setPhoto(this.photo);
+                if (activity.currentPhotoHolder != null) activity.currentPhotoHolder.deselect();
+                activity.currentPhotoHolder = this;
+                this.img.setBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
+                this.selected = true;
+            }
         }
+
+        private void deselect() {
+            this.img.setBackgroundColor(0);
+            this.selected = false;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        EasyImage.handleActivityResult(requestCode, resultCode, data, activity, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                //Some error handling
+            }
+
+            @Override
+            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                //Handle the image
+                try {
+                    activity.photos.add(0,
+                            BitmapFactory.decodeStream(new FileInputStream(imageFile)));
+                    activity.photosListAdapter.notifyDataSetChanged();
+                    activity.viewHolders.get(1).select();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     // http://stackoverflow.com/a/30701422

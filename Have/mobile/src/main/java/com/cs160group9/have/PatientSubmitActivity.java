@@ -7,6 +7,9 @@ import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class PatientSubmitActivity extends AppCompatActivity {
     private PatientSubmitActivity activity = this;
 
@@ -20,8 +23,10 @@ public class PatientSubmitActivity extends AppCompatActivity {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.startActivity(new Intent(activity, ResponseReceivedActivity.class));
+                activity.startActivity(new Intent(activity, ViewRequestActivity.class));
             }
         });
+
+        this.startService(new Intent(this, PhoneToWatchService.class));
     }
 }

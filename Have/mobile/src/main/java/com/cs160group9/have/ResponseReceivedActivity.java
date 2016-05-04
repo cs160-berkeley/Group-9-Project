@@ -47,7 +47,8 @@ public class ResponseReceivedActivity extends AppCompatActivity {
                             (conditions.size() > 2 ? ", or " : " or "))
                     : " ").append(o.get("name").getAsString());
         }
-        result.append(".\n\nHere's what they said: \"That looks distinctly like eczema, a common skin condition.\"");
+        result.append(".\n\nHere's what they said: " +
+                "\"That looks distinctly like eczema, a common skin condition.\"");
         received.setText(result.toString());
 
         Button requestButton = (Button) this.findViewById(R.id.requestButton);
