@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "name": "herpes",
+      "symptoms": "pain, itching, small sores, ulcers, scabs"
+    },
+    {
+      "name": "syphilis",
+      "symptoms": "rashes, small bumps, ulcers, discharge"
+    },
+    {
+      "name": "gonorrhea",
+      "symptoms": "painful urination, discharge"
+    },
+    {
+      "name": "HIV/AIDS",
+      "symptoms": "sore throat, swollen lymph glands"
+    },
+    {
+      "name": "chlamydia",
+      "symptoms": "painful urination, discharge, bleeding"
+    }
+  ]
+}
