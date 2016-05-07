@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cs160group9.common.ExpertResponse;
 import com.cs160group9.common.PatientRequest;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class SwipeRightCard extends Fragment {
     private static final int SPEECH_REQUEST_CODE = 0;
 
     private PatientRequest patientRequest;
+    private String expertResponseString;
 
     private Button recordButton;
     private Button submitButton;
@@ -53,9 +55,9 @@ public class SwipeRightCard extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent loadResultsOnPhoneIntent = new Intent(getActivity(), WatchToPhoneService.class);
-                loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
+                loadResultsOnPhoneIntent.putExtra("RESPONSE", expertResponseString);
                 getActivity().startService(loadResultsOnPhoneIntent);
-                Log.e("SwipeRightActivity", "RESULT SENT TO SERVICE");
+                Log.e("SwipeRight", "RESPONSE SENT TO WatchToPhoneService");
             }
         });
 
@@ -82,6 +84,7 @@ public class SwipeRightCard extends Fragment {
             String spokenText = results.get(0);
             // Do something with spokenText
             Log.e("SPOKENTEXT", spokenText);
+            expertResponseString = spokenText;
             recordResponseText.setText(spokenText);
             backgroundImage.setVisibility(View.INVISIBLE);
             recordButton.setText("Re-Record");
