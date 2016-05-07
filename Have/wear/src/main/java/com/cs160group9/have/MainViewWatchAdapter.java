@@ -10,14 +10,10 @@ import com.cs160group9.common.PatientRequest;
 import java.util.List;
 
 public class MainViewWatchAdapter extends FragmentPagerAdapter {
-
-    private final Context mContext;
-    private List mRows;
     private PatientRequest patientRequest;
 
     public MainViewWatchAdapter(Context ctx, FragmentManager fm, PatientRequest pr) {
         super(fm);
-        mContext = ctx;
         patientRequest = pr;
     }
 

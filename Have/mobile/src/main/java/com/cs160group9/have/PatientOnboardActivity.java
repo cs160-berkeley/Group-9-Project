@@ -67,8 +67,6 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
     private Button step2NextButton;
     private Button step3NextButton;
 
-    // TODO: fix disabled button style
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -409,10 +407,11 @@ public class PatientOnboardActivity extends AppCompatActivity implements Request
                 Bitmap photo = activity.photos.get(position - 1);
                 holder.bind(photo, position);
             } else {
+                BitmapDrawable bmd = ((BitmapDrawable) activity.getResources()
+                        .getDrawable(R.drawable.newphoto));
+                assert bmd != null;
                 holder.bind(
-                        ((BitmapDrawable) activity.getResources()
-                                .getDrawable(R.drawable.newphoto))
-                        .getBitmap(),
+                        bmd.getBitmap(),
                         position
                 );
             }

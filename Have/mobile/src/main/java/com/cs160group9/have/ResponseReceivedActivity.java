@@ -39,21 +39,11 @@ public class ResponseReceivedActivity extends AppCompatActivity {
             this.response.addProperty("positive", false);
 
             boolean positive = this.response.get("positive").getAsBoolean();
-//        JsonArray conditions = this.response.get("conditions").getAsJsonArray();
 
             TextView received = (TextView) this.findViewById(R.id.got_consensus);
             assert received != null;
             StringBuilder result = new StringBuilder(positive ?
                     this.getString(R.string.positive) : this.getString(R.string.negative));
-//            if (positive) result.append(conditions.get(0).getAsJsonObject().get("name").getAsString());
-//            else for (int i = 0; i < conditions.size(); i ++) {
-//                JsonObject o = conditions.get(i).getAsJsonObject();
-//                result.append(i > 0 ?
-//                        (i < conditions.size() - 1 ? ", " :
-//                                (conditions.size() > 2 ? ", or " : " or "))
-//                        : " ").append(o.get("name").getAsString());
-//            }
-//            result.append(".\n\nHere's what they said: \"That looks distinctly like eczema, a common skin condition.\"");
             result.append(".\n\nHere's what they said: \"" + expertResponseString + "\"");
             received.setText(result.toString());
 
@@ -67,9 +57,6 @@ public class ResponseReceivedActivity extends AppCompatActivity {
             });
 
         }
-//        this.response = new JsonParser()
-//                .parse(this.getSharedPreferences("response", 0).getString("response", ""))
-//                .getAsJsonObject();
 
     }
 }

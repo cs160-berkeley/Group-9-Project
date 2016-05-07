@@ -58,8 +58,6 @@ public class WatchToPhoneService extends Service {
                     sendMessage("RESPONSE", expertResponse);
                     Log.e(TAG, expertResponse);
 
-                } else {
-
                 }
 
             }

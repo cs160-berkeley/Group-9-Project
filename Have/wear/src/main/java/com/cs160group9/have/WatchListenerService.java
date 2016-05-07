@@ -20,6 +20,7 @@ public class WatchListenerService extends WearableListenerService {
             Log.d(TAG, "onMessageReceived: " + messageEvent.getData().toString());
             this.request =
                     new JsonParser().parse(messageEvent.getData().toString()).getAsJsonObject();
+            this.saveRequest();
         } else {
             super.onMessageReceived(messageEvent);
         }

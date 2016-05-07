@@ -12,11 +12,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private static final String TAG = "WelcomeActivity";
 
     private WelcomeActivity activity = this;
-
-    private JsonObject request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +21,6 @@ public class WelcomeActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_welcome);
 
         SharedPreferences prefs = this.getSharedPreferences("request", 0);
-//        prefs.edit().remove("request").commit();
         if (prefs.contains("request")) this.goToSubmitted();
 
         Button getStartedButton = (Button) this.findViewById(R.id.getStartedButton);
