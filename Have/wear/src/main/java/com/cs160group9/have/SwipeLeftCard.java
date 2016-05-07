@@ -23,6 +23,7 @@ public class SwipeLeftCard extends Fragment {
     private static final int SPEECH_REQUEST_CODE = 0;
 
     private PatientRequest patientRequest;
+    private String expertResponseString;
 
     private Button recordButton;
     private Button submitButton;
@@ -53,9 +54,9 @@ public class SwipeLeftCard extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent loadResultsOnPhoneIntent = new Intent(getActivity(), WatchToPhoneService.class);
-                loadResultsOnPhoneIntent.putExtra("RESULT", "Result string");
+                loadResultsOnPhoneIntent.putExtra("RESPONSE", expertResponseString);
                 getActivity().startService(loadResultsOnPhoneIntent);
-                Log.e("SwipeLeftActivity", "RESULT SENT TO SERVICE");
+                Log.e("SwipeLeft", "RESPONSE SENT TO WatchToPhoneService");
             }
         });
 
@@ -82,6 +83,8 @@ public class SwipeLeftCard extends Fragment {
             String spokenText = results.get(0);
             // Do something with spokenText
             Log.e("SPOKENTEXT", spokenText);
+            Log.e("SPOKENTEXT", spokenText);
+            expertResponseString = spokenText;
             recordResponseText.setText(spokenText);
             backgroundImage.setVisibility(View.INVISIBLE);
             recordButton.setText("Re-Record");
