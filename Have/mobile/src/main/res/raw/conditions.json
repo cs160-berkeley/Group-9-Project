@@ -7,6 +7,14 @@
     {
       "name": "syphilis",
       "symptoms": "rashes, small bumps, ulcers, discharge"
+    },
+    {
+      "name": "gonorrhea",
+      "symptoms": "painful urination, discharge"
+    },
+    {
+      "name": "chlamydia",
+      "symptoms": "painful urination, discharge, bleeding"
     }
   ]
 }
