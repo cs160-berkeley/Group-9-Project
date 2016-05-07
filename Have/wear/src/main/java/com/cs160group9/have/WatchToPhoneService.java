@@ -45,6 +45,7 @@ public class WatchToPhoneService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.e(TAG, "onStartCommand");
         final Bundle extras = intent.getExtras();
 
         new Thread(new Runnable() {
@@ -53,6 +54,9 @@ public class WatchToPhoneService extends Service {
                 mWatchApiClient.connect();
 
                 if (extras != null) {
+                    String expertResponse = extras.getString("RESPONSE");
+                    sendMessage("RESPONSE", expertResponse);
+                    Log.e(TAG, expertResponse);
 
                 } else {
 
@@ -79,6 +83,7 @@ public class WatchToPhoneService extends Service {
                 for (Node node : nodes.getNodes()) {
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
                             mWatchApiClient, node.getId(), path, text.getBytes()).await();
+                    Log.e(TAG, result.getStatus().toString());
                 }
             }
         }).start();
